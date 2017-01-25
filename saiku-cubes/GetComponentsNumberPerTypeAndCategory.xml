@@ -1,0 +1,44 @@
+<Schema name="GetComponentsNumberPerTypeAndCategory">
+  <Dimension type="StandardDimension" visible="true" name="screen">
+    <Hierarchy name="screen" visible="true" hasAll="true" primaryKey="id">
+      <Table name="screen" alias="">
+      </Table>
+      <Level name="screen_name" visible="true" table="screen" column="id" nameColumn="name" uniqueMembers="true">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="project">
+    <Hierarchy name="project" visible="true" hasAll="true" primaryKey="project_id">
+      <Table name="project" alias="">
+      </Table>
+      <Level name="project_name" visible="true" table="project" column="project_id" nameColumn="name" uniqueMembers="true">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" name="component_type_category">
+    <Hierarchy name="type" visible="true" hasAll="true" primaryKey="id">
+      <Table name="component_category" alias="">
+      </Table>
+      <Level name="type" visible="true" table="component_category" column="type" nameColumn="type" uniqueMembers="true">
+      </Level>
+    </Hierarchy>
+    <Hierarchy name="category" visible="true" hasAll="true" primaryKey="id">
+      <Table name="component_category" alias="">
+      </Table>
+      <Level name="category" visible="true" table="component_category" column="category" nameColumn="category" uniqueMembers="true">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="GetComponentsNumberPerTypeAndCategory" visible="true" cache="true" enabled="true">
+    <Table name="component" alias="">
+    </Table>
+    <DimensionUsage source="screen" name="screen" visible="true" foreignKey="screen_id">
+    </DimensionUsage>
+    <DimensionUsage source="project" name="project" visible="true" foreignKey="project_id">
+    </DimensionUsage>
+    <DimensionUsage source="component_type_category" name="type_category" visible="true" foreignKey="type_id">
+    </DimensionUsage>
+    <Measure name="components_number" column="id" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
