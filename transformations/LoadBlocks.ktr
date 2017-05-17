@@ -111,9 +111,11 @@
   <hop> <from>GetCompleteURL</from><to>DeleteWhiteSpaces</to><enabled>Y</enabled> </hop>
   <hop> <from>DeleteWhiteSpaces</from><to>HTTPQuery</to><enabled>Y</enabled> </hop>
   <hop> <from>GetBlockType</from><to>FilterNullRows</to><enabled>Y</enabled> </hop>
-  <hop> <from>FilterNullRows</from><to>InsertBlocks</to><enabled>Y</enabled> </hop>
-  <hop> <from>HTTPQuery</from><to>GetBlockType</to><enabled>Y</enabled> </hop>
-  <hop> <from>GetBlockType</from><to>Logger</to><enabled>Y</enabled> </hop>
+  <hop> <from>HTTPQuery</from><to>FilterEmptyResults</to><enabled>Y</enabled> </hop>
+  <hop> <from>FilterEmptyResults</from><to>GetBlockType</to><enabled>Y</enabled> </hop>
+  <hop> <from>GetBlockCategory</from><to>JoinBlocksWithCategories</to><enabled>Y</enabled> </hop>
+  <hop> <from>FilterNullRows</from><to>JoinBlocksWithCategories</to><enabled>Y</enabled> </hop>
+  <hop> <from>JoinBlocksWithCategories</from><to>InsertBlocks</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>DeleteWhiteSpaces</name>
@@ -150,6 +152,35 @@
     </step>
 
   <step>
+    <name>FilterEmptyResults</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>GetBlockType</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>result</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>&#x3c;xml</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>FilterNullRows</name>
     <type>FilterRows</type>
     <description/>
@@ -160,7 +191,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>InsertBlocks</send_true_to>
+<send_true_to>JoinBlocksWithCategories</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
@@ -184,7 +215,7 @@
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>816</xloc>
+      <xloc>928</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
@@ -209,7 +240,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8888&#x2f;exportVedilsData&#x3f;action&#x3d;getFile&#x26;userId&#x3d;</nullif>
+        <nullif>http&#x3a;&#x2f;&#x2f;vedils.uca.es&#x2f;exportVedilsData&#x3f;action&#x3d;getFile&#x26;userId&#x3d;</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -344,7 +375,7 @@
     <name>GetBlockType</name>
     <type>getXMLData</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
          <partitioning>
@@ -360,7 +391,7 @@
     <readurl>N</readurl>
     <validating>N</validating>
     <usetoken>N</usetoken>
-    <IsIgnoreEmptyFile>Y</IsIgnoreEmptyFile>
+    <IsIgnoreEmptyFile>N</IsIgnoreEmptyFile>
     <doNotFailIfNoFile>Y</doNotFailIfNoFile>
     <rownum_field/>
     <encoding>UTF-8</encoding>
@@ -419,7 +450,7 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
+      <xloc>832</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
@@ -566,7 +597,7 @@
            <schema_name/>
            </partitioning>
     <connection>VedilsProjectsConnectionDB</connection>
-    <sql>SELECT 1 as split_flag,&#xa;	id as screen_id, &#xa;	project_id as project_id, &#xa;	user_id as user_id, &#xa;	path as path&#xa;FROM screen</sql>
+    <sql>SELECT 1 as split_flag,&#xa;	id as screen_id, &#xa;	project_id as project_id, &#xa;	user_id as user_id, &#xa;	path as path,&#xa;	user_email as user_email,&#xa;	project_name as project_name&#xa;FROM screen</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -599,8 +630,8 @@
     <httpPassword>Encrypted </httpPassword>
     <proxyHost/>
     <proxyPort/>
-    <socketTimeout>10000</socketTimeout>
-    <connectionTimeout>10000</connectionTimeout>
+    <socketTimeout>-1</socketTimeout>
+    <connectionTimeout>-1</connectionTimeout>
     <closeIdleConnectionsTime>-1</closeIdleConnectionsTime>
     <lookup>
     </lookup>
@@ -613,6 +644,120 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>592</xloc>
       <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>InsertBlocks</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>VedilsProjectsConnectionDB</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema/>
+      <table>block</table>
+      <key>
+        <name>screen_id</name>
+        <field>screen_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>project_id</name>
+        <field>project_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>id</name>
+        <field>block_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>user_id</name>
+        <field>user_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>type</name>
+        <field>type</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>blockcategory_category</name>
+        <field>category</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>user_email</name>
+        <field>user_email</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>project_name</name>
+        <field>project_name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>screen_id</name>
+        <rename>screen_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>project_id</name>
+        <rename>project_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>block_id</name>
+        <rename>id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>user_id</name>
+        <rename>user_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>type</name>
+        <rename>type</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>category</name>
+        <rename>blockcategory_category</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>user_email</name>
+        <rename>user_email</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>project_name</name>
+        <rename>project_name</rename>
+        <update>N</update>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>624</xloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -649,8 +794,39 @@
     </step>
 
   <step>
-    <name>InsertBlocks</name>
-    <type>InsertUpdate</type>
+    <name>JoinBlocksWithCategories</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>type</leftvalue>
+ <function>CONTAINS</function>
+ <rightvalue>blockcategory_type</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>480</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GetBlockCategory</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -660,86 +836,16 @@
            <schema_name/>
            </partitioning>
     <connection>VedilsProjectsConnectionDB</connection>
-    <commit>100</commit>
-    <update_bypassed>N</update_bypassed>
-    <lookup>
-      <schema/>
-      <table>block</table>
-      <key>
-        <name>screen_id</name>
-        <field>screen_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>project_id</name>
-        <field>project_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>type</name>
-        <field>type</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>id</name>
-        <field>block_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>screen_id</name>
-        <rename>screen_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>project_id</name>
-        <rename>project_id</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>type</name>
-        <rename>type</rename>
-        <update>Y</update>
-      </value>
-      <value>
-        <name>block_id</name>
-        <rename>id</rename>
-        <update>Y</update>
-      </value>
-    </lookup>
+    <sql>SELECT id as blockcategory_id,&#xa;	type as blockcategory_type,&#xa;	category as blockcategory_category	&#xa;FROM block_category</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>928</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Logger</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage/>
-    <fields>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
-      <yloc>288</yloc>
+      <xloc>480</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -747,12 +853,12 @@
   <step_error_handling>
       <error>
         <source_step>GetBlockType</source_step>
-        <target_step>Logger</target_step>
-        <is_enabled>Y</is_enabled>
-        <nr_valuename/>
-        <descriptions_valuename/>
-        <fields_valuename/>
-        <codes_valuename/>
+        <target_step/>
+        <is_enabled>N</is_enabled>
+        <nr_valuename>numberErrors</nr_valuename>
+        <descriptions_valuename>errorDescription</descriptions_valuename>
+        <fields_valuename>errorField</fields_valuename>
+        <codes_valuename>errorCode</codes_valuename>
         <max_errors/>
         <max_pct_errors/>
         <min_pct_rows/>

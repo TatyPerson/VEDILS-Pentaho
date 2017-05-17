@@ -196,7 +196,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8888&#x2f;exportVedilsData&#x3f;action&#x3d;getProjectsByUserId&#x26;userId&#x3d;</nullif>
+        <nullif>http&#x3a;&#x2f;&#x2f;vedils.uca.es&#x2f;exportVedilsData&#x3f;action&#x3d;getProjectsByUserId&#x26;userId&#x3d;</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>

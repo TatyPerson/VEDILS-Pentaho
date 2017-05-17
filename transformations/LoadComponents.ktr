@@ -257,7 +257,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8888&#x2f;exportVedilsData&#x3f;action&#x3d;getFile&#x26;userId&#x3d;</nullif>
+        <nullif>http&#x3a;&#x2f;&#x2f;vedils.uca.es&#x2f;exportVedilsData&#x3f;action&#x3d;getFile&#x26;userId&#x3d;</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -696,7 +696,7 @@
            <schema_name/>
            </partitioning>
     <connection>VedilsProjectsConnectionDB</connection>
-    <sql>SELECT 1 as split_flag,&#xa;	id as screen_id, &#xa;	project_id as project_id, &#xa;	user_id as user_id, &#xa;	path as path&#xa;FROM screen</sql>
+    <sql>SELECT 1 as split_flag,&#xa;	id as screen_id, &#xa;	project_id as project_id, &#xa;	user_id as user_id, &#xa;	path as path,&#xa;	user_email as user_email,&#xa;	project_name as project_name&#xa;FROM screen</sql>
     <limit>0</limit>
     <lookup/>
     <execute_each_row>N</execute_each_row>
@@ -771,12 +771,6 @@
         <name2/>
       </key>
       <key>
-        <name>componentcategory_id</name>
-        <field>type_id</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
         <name>project_id</name>
         <field>project_id</field>
         <condition>&#x3d;</condition>
@@ -785,6 +779,42 @@
       <key>
         <name>component_name</name>
         <field>name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>user_id</name>
+        <field>user_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>componentcategory_type</name>
+        <field>type</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>componentcategory_category</name>
+        <field>category</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>user_email</name>
+        <field>user_email</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>project_name</name>
+        <field>project_name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>componentcategory_id</name>
+        <field>type_id</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -799,13 +829,38 @@
         <update>Y</update>
       </value>
       <value>
-        <name>type_id</name>
-        <rename>componentcategory_id</rename>
+        <name>project_id</name>
+        <rename>project_id</rename>
         <update>N</update>
       </value>
       <value>
-        <name>project_id</name>
-        <rename>project_id</rename>
+        <name>user_id</name>
+        <rename>user_id</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>type</name>
+        <rename>componentcategory_type</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>category</name>
+        <rename>componentcategory_category</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>user_email</name>
+        <rename>user_email</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>project_name</name>
+        <rename>project_name</rename>
+        <update>N</update>
+      </value>
+      <value>
+        <name>type_id</name>
+        <rename>componentcategory_id</rename>
         <update>N</update>
       </value>
     </lookup>

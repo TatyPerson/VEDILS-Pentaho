@@ -103,10 +103,14 @@
     </attributes>
   </connection>
   <order>
+  <hop> <from>JoinUserID</from><to>JoinUserEmail</to><enabled>Y</enabled> </hop>
+  <hop> <from>JoinUserEmail</from><to>InsertProject</to><enabled>Y</enabled> </hop>
   <hop> <from>GetURL</from><to>RESTQuery</to><enabled>Y</enabled> </hop>
+  <hop> <from>SettingsJSON</from><to>JoinUserID</to><enabled>Y</enabled> </hop>
   <hop> <from>RESTQuery</from><to>ProjectJSON</to><enabled>Y</enabled> </hop>
+  <hop> <from>GetUserEmail</from><to>JoinUserEmail</to><enabled>Y</enabled> </hop>
   <hop> <from>ProjectJSON</from><to>SettingsJSON</to><enabled>Y</enabled> </hop>
-  <hop> <from>SettingsJSON</from><to>InsertProject</to><enabled>Y</enabled> </hop>
+  <hop> <from>GetUserID</from><to>JoinUserID</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>GetURL</name>
@@ -127,7 +131,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>http&#x3a;&#x2f;&#x2f;localhost&#x3a;8888&#x2f;exportVedilsData&#x3f;action&#x3d;listEntities&#x26;entity&#x3d;ProjectData</nullif>
+        <nullif>http&#x3a;&#x2f;&#x2f;vedils.uca.es&#x2f;exportVedilsData&#x3f;action&#x3d;listEntities&#x26;entity&#x3d;ProjectData</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -164,14 +168,14 @@
       <schema/>
       <table>project</table>
       <key>
-        <name>project_id</name>
+        <name>project_id_get</name>
         <field>project_id</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
       <value>
         <name>project_id</name>
-        <rename>project_id</rename>
+        <rename>project_id_get</rename>
         <update>N</update>
       </value>
       <value>
@@ -229,10 +233,20 @@
         <rename>version_name</rename>
         <update>Y</update>
       </value>
+      <value>
+        <name>user_id</name>
+        <rename>user_id_get</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>user_email</name>
+        <rename>user_email</rename>
+        <update>Y</update>
+      </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
+      <xloc>720</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
@@ -548,7 +562,121 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
+      <xloc>400</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GetUserID</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>VedilsProjectsConnectionDB</connection>
+    <sql>SELECT user_id, project_id as project_id_get FROM user_project&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>496</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>JoinUserID</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>project_id_get</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue>project_id</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>496</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>GetUserEmail</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>VedilsProjectsConnectionDB</connection>
+    <sql>SELECT user_id as user_id_get, email as user_email FROM user&#x3b;</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>JoinUserEmail</name>
+    <type>JoinRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <directory>&#x25;&#x25;java.io.tmpdir&#x25;&#x25;</directory>
+      <prefix>out</prefix>
+      <cache_size>500</cache_size>
+      <main/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>user_id_get</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue>user_id</rightvalue>
+ </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>

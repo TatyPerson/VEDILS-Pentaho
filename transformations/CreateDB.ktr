@@ -106,13 +106,10 @@
   <hop> <from>CreateUserTable</from><to>CreateProjectTable</to><enabled>Y</enabled> </hop>
   <hop> <from>CreateProjectTable</from><to>CreateUserProjectTable</to><enabled>Y</enabled> </hop>
   <hop> <from>CreateUserProjectTable</from><to>CreateScreenTable</to><enabled>Y</enabled> </hop>
-  <hop> <from>CreateScreenTable</from><to>CreateBlockTable</to><enabled>Y</enabled> </hop>
-  <hop> <from>CreateGetProjectsInformationPerTime</from><to>CreateGetBlocksNumberPerTypeTable</to><enabled>Y</enabled> </hop>
-  <hop> <from>CreateGetBlocksNumberPerTypeTable</from><to>CreateGetComponentsNumberPerTypeAndCategoryTable</to><enabled>Y</enabled> </hop>
-  <hop> <from>CreateTimeTable</from><to>CreateGetProjectsInformationPerTime</to><enabled>Y</enabled> </hop>
-  <hop> <from>CreateComponentTable</from><to>CreateTimeTable</to><enabled>Y</enabled> </hop>
   <hop> <from>CreateBlockTable</from><to>CreateComponentCategory</to><enabled>Y</enabled> </hop>
   <hop> <from>CreateComponentCategory</from><to>CreateComponentTable</to><enabled>Y</enabled> </hop>
+  <hop> <from>CreateScreenTable</from><to>CreateBlockCategory</to><enabled>Y</enabled> </hop>
+  <hop> <from>CreateBlockCategory</from><to>CreateBlockTable</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>CreateBlockTable</name>
@@ -130,7 +127,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;block&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;type&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;screen_id&#x60; int&#x28;100&#x29; NOT NULL,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;block_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
+    <sql>CREATE TABLE &#x60;block&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;type&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;category&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;screen_id&#x60; int&#x28;100&#x29; NOT NULL,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;block_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;project_name&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_email&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -140,7 +137,7 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
+      <xloc>736</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -172,7 +169,7 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>752</xloc>
+      <xloc>896</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -194,7 +191,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;component&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;screen_id&#x60; int&#x28;100&#x29; NOT NULL,&#xa;	&#x60;type_id&#x60; int&#x28;100&#x29; NOT NULL,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
+    <sql>CREATE TABLE &#x60;component&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;screen_id&#x60; int&#x28;100&#x29; NOT NULL,&#xa;	&#x60;type_id&#x60; int&#x28;100&#x29; NOT NULL,&#xa;	&#x60;type&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;category&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;project_name&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_email&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -204,104 +201,8 @@
     </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>928</xloc>
+      <xloc>1072</xloc>
       <yloc>80</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CreateGetBlocksNumberPerTypeTable</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>VedilsProjectsConnectionDB</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;getblocksnumberpertype&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;screen_id&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;type&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;number&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>368</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CreateGetComponentsNumberPerTypeAndCategoryTable</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>VedilsProjectsConnectionDB</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;getcomponentsnumberpertypeandcategory&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;screen_id&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;type&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;category&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;number&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CreateGetProjectsInformationPerTime</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>VedilsProjectsConnectionDB</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;getprojectsinformationpertime&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;time_id&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;user_id&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;project_name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;screens_number&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;blocks_number&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;components_number&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>224</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -322,7 +223,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;project&#x60; &#x28;&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;version_code&#x60; int&#x28;50&#x29; DEFAULT NULL,&#xa;	&#x60;version_name&#x60; varchar&#x28;50&#x29; DEFAULT NULL,&#xa;	&#x60;date_created&#x60; bigint&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;date_modified&#x60; bigint&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalaiaexports&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalbuilds&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalcompaniondebugs&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalemulatordebugs&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalusbdebugs&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalworktime&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;project_id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
+    <sql>CREATE TABLE &#x60;project&#x60; &#x28;&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;user_email&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;version_code&#x60; int&#x28;50&#x29; DEFAULT NULL,&#xa;	&#x60;version_name&#x60; varchar&#x28;50&#x29; DEFAULT NULL,&#xa;	&#x60;date_created&#x60; bigint&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;date_modified&#x60; bigint&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalaiaexports&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalbuilds&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalcompaniondebugs&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalemulatordebugs&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalusbdebugs&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;totalworktime&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;screensNumber&#x60; int&#x28;100&#x29; DEFAULT 0,&#xa;	&#x60;componentsNumber&#x60; int&#x28;100&#x29; DEFAULT 0,&#xa;	&#x60;blocksNumber&#x60; int&#x28;100&#x29; DEFAULT 0,&#xa;	PRIMARY KEY &#x28;&#x60;project_id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -354,7 +255,7 @@
     <single_statement>N</single_statement>
     <replace_variables>N</replace_variables>
     <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;screen&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;path&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
+    <sql>CREATE TABLE &#x60;screen&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;project_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_id&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;name&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;path&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;project_name&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	&#x60;user_email&#x60; varchar&#x28;100&#x29; NOT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
     <set_params>N</set_params>
     <insert_field/>
     <update_field/>
@@ -365,38 +266,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>464</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CreateTimeTable</name>
-    <type>ExecSQL</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>VedilsProjectsConnectionDB</connection>
-    <execute_each_row>N</execute_each_row>
-    <single_statement>N</single_statement>
-    <replace_variables>N</replace_variables>
-    <quoteString>N</quoteString>
-    <sql>CREATE TABLE &#x60;time&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;date&#x60; bigint&#x28;100&#x29; UNIQUE,&#xa;	&#x60;day_id&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;month_id&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;year_id&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;day&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;month&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;year&#x60; int&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
-    <set_params>N</set_params>
-    <insert_field/>
-    <update_field/>
-    <delete_field/>
-    <read_field/>
-    <arguments>
-    </arguments>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1072</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
@@ -461,6 +330,38 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>48</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>CreateBlockCategory</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>VedilsProjectsConnectionDB</connection>
+    <execute_each_row>N</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>N</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>CREATE TABLE &#x60;block_category&#x60; &#x28;&#xa;	&#x60;id&#x60; int&#x28;100&#x29; AUTO_INCREMENT,&#xa;	&#x60;type&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	&#x60;category&#x60; varchar&#x28;100&#x29; DEFAULT NULL,&#xa;	PRIMARY KEY &#x28;&#x60;id&#x60;&#x29;&#xa;&#x29; ENGINE&#x3d;InnoDB DEFAULT CHARSET&#x3d;utf8&#x3b;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
       </GUI>
