@@ -100,7 +100,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;CreateDB.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;CreateDB.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
