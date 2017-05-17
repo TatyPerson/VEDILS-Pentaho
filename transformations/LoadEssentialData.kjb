@@ -60,7 +60,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadUsers.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadUsers.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -93,7 +93,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadProjects.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadProjects.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -126,7 +126,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadUserProjectRelations.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadUserProjectRelations.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -159,7 +159,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadScreens.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadScreens.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -192,7 +192,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadBlocks.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadBlocks.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -225,7 +225,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadComponentCategory.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadComponentCategory.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -258,7 +258,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadComponents.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadComponents.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -291,7 +291,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadBlockCategory.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadBlockCategory.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
@@ -324,7 +324,7 @@
       <type>TRANS</type>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>&#x2f;Users&#x2f;Taty&#x2f;Desktop&#x2f;VEDILS-Pentaho&#x2f;LoadProjectMetrics.ktr</filename>
+      <filename>&#x2f;home&#x2f;gestor&#x2f;pentaho-transformations&#x2f;VEDILS-Pentaho&#x2f;transformations&#x2f;LoadProjectMetrics.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
