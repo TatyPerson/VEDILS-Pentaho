@@ -1,0 +1,34 @@
+<Schema name="ProjectData cube">
+  <Dimension type="StandardDimension" visible="true" name="Projects">
+    <Hierarchy name="Projects" visible="true" hasAll="true">
+      <Table name="project" alias="">
+      </Table>
+      <Level name="UserID" visible="true" column="user_id" nameColumn="user_email" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ProjectID" visible="true" column="project_id" nameColumn="name" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="ProjectData cube" visible="true" cache="true" enabled="true">
+    <Table name="project" alias="">
+    </Table>
+    <DimensionUsage source="Projects" name="Projects" visible="true" foreignKey="project_id">
+    </DimensionUsage>
+    <Measure name="timeSpent" column="totalworktime" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numScreens" column="screensNumber" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numComponents" column="componentsNumber" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numBlocks" column="blocksNumber" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numBuilds" column="totalbuilds" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numCompanionDebugs" column="totalcompaniondebugs" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numEmulatorDebugs" column="totalemulatordebugs" aggregator="sum" visible="true">
+    </Measure>
+    <Measure name="numUSBDebugs" column="totalusbdebugs" aggregator="sum" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

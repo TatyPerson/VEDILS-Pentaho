@@ -1,0 +1,34 @@
+<Schema name="TotalComponents cube IDs">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Screens">
+    <Hierarchy name="Screens" visible="true" hasAll="true">
+      <Table name="screen">
+      </Table>
+      <Level name="UserID" visible="true" column="user_id" nameColumn="user_id" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ProjectID" visible="true" column="project_id" nameColumn="project_id" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ScreenID" visible="true" column="id" nameColumn="id" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Components">
+    <Hierarchy name="Components" visible="true" hasAll="true">
+      <Table name="component">
+      </Table>
+      <Level name="ComponentCategory" visible="true" column="category" nameColumn="category" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ComponentType" visible="true" column="type" nameColumn="type" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="TotalComponents cube IDs" visible="true" cache="true" enabled="true">
+    <Table name="component">
+    </Table>
+    <DimensionUsage source="Screens" name="Screens" visible="true" foreignKey="screen_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Components" name="Components" visible="true" foreignKey="id" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="numComponents" column="type" datatype="String" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>

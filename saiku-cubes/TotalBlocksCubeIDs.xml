@@ -1,0 +1,34 @@
+<Schema name="TotalBlocks cube IDs">
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Screens">
+    <Hierarchy name="Screens" visible="true" hasAll="true">
+      <Table name="screen">
+      </Table>
+      <Level name="UserID" visible="true" column="user_id" nameColumn="user_id" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ProjectID" visible="true" column="project_id" nameColumn="project_id" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="ScreenID" visible="true" column="id" nameColumn="id" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Dimension type="StandardDimension" visible="true" highCardinality="false" name="Blocks">
+    <Hierarchy name="Blocks" visible="true" hasAll="true">
+      <Table name="block">
+      </Table>
+      <Level name="BlockCategory" visible="true" column="category" nameColumn="category" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+      <Level name="BlockType" visible="true" column="type" nameColumn="type" type="String" uniqueMembers="true" levelType="Regular" hideMemberIf="Never">
+      </Level>
+    </Hierarchy>
+  </Dimension>
+  <Cube name="TotalBlocks cube IDs" visible="true" cache="true" enabled="true">
+    <Table name="block">
+    </Table>
+    <DimensionUsage source="Screens" name="Screens" visible="true" foreignKey="screen_id" highCardinality="false">
+    </DimensionUsage>
+    <DimensionUsage source="Blocks" name="Blocks" visible="true" foreignKey="id" highCardinality="false">
+    </DimensionUsage>
+    <Measure name="numBlocks" column="type" datatype="String" aggregator="count" visible="true">
+    </Measure>
+  </Cube>
+</Schema>
